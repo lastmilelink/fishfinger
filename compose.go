@@ -83,7 +83,6 @@ func (c *Compose) Stop(services ...string) error {
 }
 
 // Status returns `true` if `service` is in running state, `false` otherwise.
-// If `service` does not exist, it returns an `error`.
 func (c *Compose) Status(service string) (bool, error) {
 	serviceObj, err := c.CreateService(service)
 	if err != nil {
@@ -93,7 +92,7 @@ func (c *Compose) Status(service string) (bool, error) {
 	if err != nil || len(ctnrs) == 0 {
 		return false, err
 	}
-	return ctnrs[0].IsRunning(context.Background()), nil
+	return ctnrs[0].IsRunning(context.Background())
 }
 
 // Port returns the host address where `service` is bound to `port`. If
